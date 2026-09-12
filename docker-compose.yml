@@ -1,0 +1,28 @@
+services:
+  tg-auto-auth:
+    build: .
+    env_file:
+      - .env
+    environment:
+      WEB_HOST: 0.0.0.0
+      WEB_PORT: 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - tg_auto_auth_data:/app/data
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  tg_auto_auth_data:

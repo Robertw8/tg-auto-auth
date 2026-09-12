@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Подключение Telegram</title>
+    <link rel="stylesheet" href="/static/auth.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="/static/auth.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div class="brand-mark" aria-hidden="true">🔐</div>
+        <div>
+          <h1>Подключение Telegram</h1>
+          <p>Авторизуйте аккаунт, который хотите использовать в боте.</p>
+        </div>
+      </header>
+
+      <ol class="progress" aria-label="Шаги подключения">
+        <li class="active" data-progress="phone"><span>1</span>Номер</li>
+        <li data-progress="code"><span>2</span>Код</li>
+        <li data-progress="password"><span>3</span>2FA</li>
+      </ol>
+
+      <section class="card">
+        <div id="status" class="status" role="status" aria-live="polite">
+          Подготавливаем безопасную форму…
+        </div>
+
+        <form id="phone-form" hidden>
+          <div class="step-heading"><span class="step-number">1</span><h2>Номер телефона</h2></div>
+          <label class="sr-only" for="phone">Номер телефона</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+380…" required>
+          <p class="hint">Введите номер в международном формате.</p>
+          <button type="submit" data-idle-label="Получить код" data-loading-label="Отправляем код…">Получить код</button>
+        </form>
+
+        <form id="code-form" hidden>
+          <div class="step-heading"><span class="step-number">2</span><h2>Код подтверждения</h2></div>
+          <label class="sr-only" for="code">Код подтверждения</label>
+          <input id="code" name="code" type="text" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9 -]{4,16}" placeholder="12345" required>
+          <p class="hint">Введите код, который Telegram прислал вашему аккаунту.</p>
+          <button type="submit" data-idle-label="Продолжить" data-loading-label="Проверяем…">Продолжить</button>
+        </form>
+
+        <form id="password-form" hidden>
+          <div class="step-heading"><span class="step-number">3</span><h2>Пароль 2FA</h2></div>
+          <label class="sr-only" for="password">Пароль 2FA</label>
+          <div class="password-field">
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Пароль" maxlength="256" required>
+            <button id="toggle-password" class="reveal" type="button" aria-label="Показать пароль" aria-pressed="false">Показать</button>
+          </div>
+          <p class="hint">На аккаунте включена двухэтапная аутентификация.</p>
+          <button type="submit" data-idle-label="Подключить аккаунт" data-loading-label="Подключаем…">Подключить аккаунт</button>
+        </form>
+
+        <section id="success" class="success" hidden>
+          <div class="success-icon" aria-hidden="true">✅</div>
+          <h2>Готово</h2>
+          <p>Аккаунт успешно подключён.</p>
+          <p class="hint">Можно закрыть это окно и вернуться в бот.</p>
+          <button id="close" type="button">Вернуться в бот</button>
+        </section>
+
+        <button id="cancel" class="secondary" type="button" hidden>Отмена</button>
+      </section>
+
+      <p class="security-note">🛡️ Код и пароль используются только для подключения.</p>
+    </main>
+  </body>
+</html>

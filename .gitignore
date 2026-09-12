@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+data/app.db
+data/app.db-*
+data/sessions/*
+!data/sessions/.gitkeep
+
